@@ -1,0 +1,43 @@
+.my-account-content{
+    .error-show {
+        position: absolute;
+        bottom: -6px;
+    }
+    
+    .breadcrumb{
+        border-bottom: 1px solid #e2e2e2;
+    }
+    .widget-title{
+        border-top:0;
+        border-bottom:1px solid #eee;
+    }
+    .widget{
+        .widget-body{
+            li{
+                a{
+                    font-weight: 500;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+    .widget-collapsible{
+        .widget-body{
+            padding-left:1.5em;
+            li{
+                padding-left:20px;
+                a{
+                    font-weight: 500;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+    .card{
+        height: 100%;
+        &.custom-bordered{
+            border:1px solid $border-color;
+            height: 100%;
+        }
+    }
+}

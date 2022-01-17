@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15.063" height="12.919" viewBox="0 0 15.063 12.919">
+  <g id="Group_10" data-name="Group 10" transform="translate(-400.35 -531.733)">
+    <g id="Icon_feather-mail" data-name="Icon feather-mail" transform="translate(398 528)">
+      <path id="Path_3" data-name="Path 3" d="M4.376,6h11.01a1.322,1.322,0,0,1,1.376,1.25v7.5A1.322,1.322,0,0,1,15.386,16H4.376A1.322,1.322,0,0,1,3,14.752V7.25A1.322,1.322,0,0,1,4.376,6Z" transform="translate(0 0)" fill="none" stroke="#999" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.3"/>
+    </g>
+    <g id="Group_5" data-name="Group 5" transform="translate(0 -1)">
+      <path id="Path_6" data-name="Path 6" d="M14.3,171.591H.461a.461.461,0,1,1,0-.923H14.3a.461.461,0,0,1,0,.923Zm0,0" transform="translate(400.5 366.873)" fill="#999" stroke="#999" strokeWidth="0.3"/>
+      <path id="Path_7" data-name="Path 7" d="M107.129,2.3c-.255,0-.461-.129-.461-.288V.288c0-.159.207-.288.461-.288s.461.129.461.288V2.013C107.591,2.171,107.384,2.3,107.129,2.3Zm0,0" transform="translate(296.908 532.883)" fill="#999" stroke="#999" strokeWidth="0.3"/>
+      <path id="Path_8" data-name="Path 8" d="M373.793,2.3c-.255,0-.461-.129-.461-.288V.288c0-.159.207-.288.461-.288s.461.129.461.288V2.013C374.255,2.171,374.048,2.3,373.793,2.3Zm0,0" transform="translate(37.932 532.883)" fill="#999" stroke="#999" strokeWidth="0.3"/>
+    </g>
+  </g>
+</svg>

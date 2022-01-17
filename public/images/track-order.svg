@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <clipPath id="clip-track-order">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="track-order" clip-path="url(#clip-track-order)">
+    <rect width="15" height="15" fill="#fff"/>
+    <g id="Group_70" data-name="Group 70" transform="translate(2.291 1.206)">
+      <g id="Group_69" data-name="Group 69">
+        <path id="Path_56" data-name="Path 56" d="M29.273,26.015a1.768,1.768,0,0,0-.293-.975,1.741,1.741,0,0,0-.779-.646,1.723,1.723,0,0,0-1.892.38,1.765,1.765,0,0,0,.263,2.7,1.723,1.723,0,0,0,2.192-.218A1.764,1.764,0,0,0,29.273,26.015Z" transform="translate(-22.327 -20.795)" fill="none" stroke="#707070" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.2"/>
+        <path id="Path_57" data-name="Path 57" d="M24.359,30.213c-.833,0-5.209-3.579-5.209-7.325a5.292,5.292,0,0,1,1.526-3.722,5.171,5.171,0,0,1,7.367,0,5.292,5.292,0,0,1,1.526,3.722C29.568,26.634,25.193,30.213,24.359,30.213Z" transform="translate(-19.15 -17.625)" fill="none" stroke="#707070" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.2"/>
+      </g>
+    </g>
+  </g>
+</svg>

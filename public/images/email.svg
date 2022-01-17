@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <clipPath id="clip-email">
+      <rect width="15" height="15"/>
+    </clipPath>
+  </defs>
+  <g id="email" clip-path="url(#clip-email)">
+    <rect width="15" height="15" fill="#fff"/>
+    <g id="Message" transform="translate(0.582 1.424)">
+      <path id="Path_88" data-name="Path 88" d="M12.323,6.851,9.607,9.06a1.406,1.406,0,0,1-1.749,0L5.118,6.851" transform="translate(-1.6 -2.273)" fill="none" stroke="#666" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.2"/>
+      <path id="Path_89" data-name="Path 89" d="M10.116,12.006a3.175,3.175,0,0,0,3.113-3.4v-4.2A3.183,3.183,0,0,0,10.116,1h-6A3.183,3.183,0,0,0,1,4.406v4.2a3.175,3.175,0,0,0,3.113,3.4Z" transform="translate(0 0)" fill="none" stroke="#666" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.2"/>
+    </g>
+  </g>
+</svg>
