@@ -5,12 +5,19 @@ import { persistStore } from 'redux-persist';
 import rootSaga from './root-saga';
 
 import cartReducer from './cart';
-
+import modalReducer from "./modal";
+import wishlistReducer from "./wishlist";
+import categoryReducer from "./categories";
+import authUserReducer from "./authUser";
 
 const sagaMiddleware = createSagaMiddleWare();
 
 const rootReducers = combineReducers( {
     cart: cartReducer,
+    modal: modalReducer,
+    wishlist: wishlistReducer,
+    category: categoryReducer,
+    user: authUserReducer
 });
 
 const makeStore = ( initialState, options ) => {

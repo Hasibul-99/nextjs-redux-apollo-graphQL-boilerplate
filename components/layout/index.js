@@ -2,7 +2,8 @@ import { useEffect, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
-import Script from 'next/script'
+import Script from 'next/script';
+import Head from "next/head"
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'react-image-lightbox/style.css';
@@ -58,6 +59,27 @@ function Layout( { children, closeLoginModal } ) {
 
     return (
         <>
+            <Head>
+                <title> B71 - ECommerce Store </title>
+                <base href="/"></base>
+                <link rel="icon" href="images/icons/favicon.png" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" />
+                <link rel="stylesheet" type="text/css" href="vendor/riode-fonts/riode-fonts.css" />
+                <link rel="stylesheet" type="text/css" href="vendor/fontawesome-free/css/all.min.css" />
+                <link rel="stylesheet" type="text/css" href="vendor/owl-carousel/owl.carousel.min.css" />
+                
+                <meta charSet="UTF-8"/>
+                <meta name="theme-color" content="#FF284F"/>
+                <meta property="og:title" content="ঘরে বসে B71"/>
+                <meta property="og:description" content="Bangladesh's best online shopping store with 17+ million products at resounding discounts in dhaka,
+                        ctg & All across Bangladesh with cash on delivery (COD)"/>
+                <meta property="og:image" content={process.env.NEXT_PUBLIC_CLIENT_URI + "/images/home/Group-34092.png"}/>
+                <meta property="og:image:secure_url" content={process.env.NEXT_PUBLIC_CLIENT_URI + "/images/home/Group-34092.png"}/>
+                <meta property="og:image:type" content="image/jpg"/>
+                <meta property="og:image:width" content="1200"/>
+                <meta property="og:image:height" content="627"/>
+            </Head>
+
             <div className={"page-wrapper " + router.pathname === '/' ? bg-white : ''}>
                 <Header />
 
@@ -81,8 +103,8 @@ function Layout( { children, closeLoginModal } ) {
                 newestOnTop={ true }
             />
 
-            <Script src="./js/jquery.min.js"/>
-            <Script src="./js/slide-to-submit.js" />
+            <script src="/js/jquery.min.js"/>
+            <script src="/js/slide-to-submit.js" />
         </>
     )
 }

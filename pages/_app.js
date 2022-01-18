@@ -2,13 +2,16 @@ import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
 import { PersistGate } from 'redux-persist/integration/react';
 import { ApolloProvider } from "@apollo/client";
-import { apolloClient } from "../server/apollo";
+import { useApollo } from "../server/apollo";
 
 import Layout from '../components/layout';
 
 import makeStore from "../store";
+import "../public/sass/style.scss";
 
 function MyApp({ Component, pageProps, store }) {
+  const apolloClient = useApollo(pageProps?.initialApolloState);
+
   return  <ApolloProvider client={apolloClient}>
             <Provider store={store}>
               <PersistGate
