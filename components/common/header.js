@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
+import { useQuery } from "@apollo/client";
 // Language 
 import useTranslation from "next-translate/useTranslation";
 
@@ -13,6 +14,10 @@ import { headerBorderRemoveList, headerCategories } from '../../utils/data/menu'
 import { objectifyForm } from "../../utils/helpers";
 
 import SearchBox from '../partials/search-box';
+import CartMenu from '../partials/cart-menu';
+import NotificationMenu from "../partials/notification-menu";
+import SidebarMenu from "../partials/sidebar-menu";
+import MainMenu from "../partials/main-menu";
 
 function Header(props) {
     const { addToCategory, isUserLogin, userOrders } = props;
@@ -22,6 +27,41 @@ function Header(props) {
     const showMobileMenu = () => {
         document.querySelector( 'body' ).classList.add( 'mmenu-active' );
     }
+
+    const { data, loading, error } = useQuery( CATEGORIES_TREE, { variables: { 
+        languageId: router.locale === 'en' ? 1 : 2
+    }});
+
+    const categories = data && data?.getCategoryTree?.tree;
+
+    const orderSearch = (e) => {
+        e.preventDefault();
+
+        let formArray = $('#form-order-Search').serializeArray();
+        let formData = objectifyForm(formArray);
+
+        if (formData && formData.orderid) {
+            let orderId = formData.orderid.trim();
+            
+            if ( orderId.length ) {
+                router.push(`/my-account/?content=order-history&orderId=${orderId}`);
+            };
+        }
+    }
+
+    useEffect( () => {
+        let header = document.querySelector( 'header' );
+        if ( header ) {
+            if ( headerBorderRemoveList.includes( router.pathname ) && header.classList.contains( 'header-border' ) ) header.classList.remove( 'header-border' )
+            else if ( !headerBorderRemoveList.includes( router.pathname ) ) document.querySelector( 'header' ).classList.add( 'header-border' );
+        }
+    }, [ router.pathname ] )
+
+    useEffect(() => {
+        if (categories) {
+            addToCategory(JSON.parse(categories));
+        }
+    }, [categories])
 
     return (
         <header className="header header-border">
@@ -182,9 +222,9 @@ function Header(props) {
                             </> : ''
                         }
                         
-                        {/* <CartMenu /> */}
+                        <CartMenu />
                         <span className="divider ml-2 mr-0"></span>
-                        {/* <NotificationMenu /> */}
+                        <NotificationMenu />
                     </div>
                 </div>
             </div>
@@ -202,13 +242,13 @@ function Header(props) {
 
                                 {
                                     router.pathname !== '/' ?  <div className="dropdown-box">
-                                        {/* <SidebarMenu/> */}
+                                        <SidebarMenu/>
                                     </div> : null
                                 }
                             </div>
                         </div>
                         <div className="col-xl-9 col-lg-9 col-md-9">
-                            {/* <MainMenu categories={categories} /> */}
+                            <MainMenu categories={categories} />
                         </div>
                     </div>
                 </div>
