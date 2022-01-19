@@ -199,3 +199,17 @@ export const DELETE_ALL_NOTIFICATION = gql`
         }
     }
 `
+
+export const CMS_CONTENT_QUERY = `
+query Query($slug: ID, $languageId: Int) {
+    cmsDetails(slug: $slug) {
+        id
+        cmsDetails(language_id: $languageId) {
+            content
+        }
+    }
+}`
+
+export const CMS_CONTENT = gql`
+    ${CMS_CONTENT_QUERY}
+`

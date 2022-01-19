@@ -103,8 +103,8 @@ function Layout( { children, closeLoginModal } ) {
                 newestOnTop={ true }
             />
 
-            <script src="/js/jquery.min.js"/>
-            <script src="/js/slide-to-submit.js" />
+            <Script src="./js/jquery.min.js"/>
+            <Script src="./js/slide-to-submit.js" />
         </>
     )
 }
