@@ -13,8 +13,7 @@ function CMSPage({cmsDetails}) {
         <main className="main">
             <Head>
                 <title> B71 - Campaign </title>
-                <meta property="og:description" content="Bangladesh's best online shopping store with 17+ million products at resounding discounts in dhaka,
-                ctg & All across Bangladesh with cash on delivery (COD)"/>
+                <meta property="og:description" content="Bangladesh's"/>
             </Head>
 
             <div className="page-content mb-10 pb-7 full-width-banner-custom">
@@ -28,7 +27,6 @@ export const getStaticPaths = async () => {
     const apolloClient = initializeApollo();
     
     let pagePaths = [];
-
     let paths = await apolloClient.query({
       query: ALL_CMS_CONTENTS
     });
@@ -42,8 +40,6 @@ export const getStaticPaths = async () => {
         ) 
     });
 
-    console.log("pagePaths======", pagePaths);
-  
     return {
         paths: pagePaths,
         fallback: true

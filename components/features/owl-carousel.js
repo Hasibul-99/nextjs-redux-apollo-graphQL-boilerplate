@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import $ from 'jquery';
 // import Carousel from 'react-owl-carousel2';
 const Carousel = dynamic(import("react-owl-carousel2"), {ssr: false});
 
