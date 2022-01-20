@@ -327,6 +327,52 @@ query Query($sliderPosition: String!, $languageId: Int, $first: Int! ) {
     }
 }
 `
-
 export const GET_HOME_DATA = gql`${GET_HOME_DATA_QUERY}`
 
+export const ADD_WISHLIST_MUTATION = gql`
+    mutation CreateWishlistMutation($variationId: Int!, $languageId: Int) {
+        createWishlist(variation_id: $variationId) {
+            id
+            wishlistItems {
+                qty
+                updated_at
+                variation_id
+                id
+                productVariation {
+                id
+                product_id
+                seller_sku
+                special_price
+                special_price_end
+                special_price_start
+                price
+                qty
+                campaignPrice {
+                    discount_price
+                }
+                productVariationImage {
+                    image_path
+                    variation_id
+                }
+                productDetails {
+                    url_key
+                    productDetail(language_id: $languageId) {
+                        name
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
+
+export const ALL_CMS_CONTENTS = gql`
+    query Data {
+        cmsPages {
+            data {
+                slug
+                type
+            }
+        }
+    }
+`

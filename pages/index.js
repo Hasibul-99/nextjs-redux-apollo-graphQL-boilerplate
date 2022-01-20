@@ -1,6 +1,5 @@
 import Head from 'next/head';
-import { useQuery } from "@apollo/client";
-import { useRouter } from 'next/router';
+import { initializeApollo  } from "../server/apollo";
 
 // Import Apollo Server and Query
 import { GET_HOME_DATA, GET_HOME_DATA_QUERY } from '../server/queries';
@@ -58,4 +57,24 @@ export default function Home({ homeContent }) {
 
     </div>
   )
+}
+
+export async function getStaticProps(ctx) {
+  const apolloClient = initializeApollo();
+
+  let homeContent = await apolloClient.query({
+    query: GET_HOME_DATA,
+    variables: {
+      sliderPosition: 'home', 
+      languageId: ctx?.locale === 'en' ? 1 : 2,
+      first: 5 
+    }
+  });
+
+  return {
+    props: {
+      homeContent: homeContent.data,
+    },
+    revalidate: 1,
+  };
 }

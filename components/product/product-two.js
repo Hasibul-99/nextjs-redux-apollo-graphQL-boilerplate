@@ -106,17 +106,23 @@ function ProductTwo( props ) {
         <div className={ `product product-two-content text-left ${ adClass }` }>
             <figure className="product-media">
                 <ALink href={ `/product/${ product?.url_key }` }>
-                    <Image
-                        alt={ product?.url_key }
-                        src={productImage(product)}
-                        // src={ product?.productVariation[0]?.productVariationImage[0]?.image_path 
-                        //     ? process.env.NEXT_PUBLIC_ASSET_URI + "/" + product?.productVariation[0]?.productVariationImage[0]?.image_path : "/images/B71_02.png" }
-                        width={imageWidth || 350}
-                        height={imageHight || 350}
-                        quality={10}
-                        responsive="true"
-                        blurDataURL="/images/product-banner.png"
-                    />
+                    <div className={'image-container'}>
+                        <Image
+                            className={'image'} 
+                            alt={ product?.url_key }
+                            src={productImage(product)}
+                            // src={ product?.productVariation[0]?.productVariationImage[0]?.image_path 
+                            //     ? process.env.NEXT_PUBLIC_ASSET_URI + "/" + product?.productVariation[0]?.productVariationImage[0]?.image_path : "/images/B71_02.png" }
+                            width={imageWidth || 350}
+                            height={imageHight || 350}
+                            quality={10}
+                            responsive="true"
+                            objectFit='contain'
+                            layout="fill"
+                            blurDataURL="/images/product-banner.png"
+                        />
+                    </div>
+                    
                 </ALink>
 
                 <div className="product-label-group">
