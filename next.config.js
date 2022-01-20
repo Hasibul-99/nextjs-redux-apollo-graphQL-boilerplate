@@ -1,8 +1,9 @@
 const nextTranslate = require('next-translate');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  // reactStrictMode: true,
+  reactStrictMode: true,
   basePath: '',
   distDir: 'build',
   trailingSlash: true,

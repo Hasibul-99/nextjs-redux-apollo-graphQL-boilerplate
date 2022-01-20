@@ -213,3 +213,120 @@ query Query($slug: ID, $languageId: Int) {
 export const CMS_CONTENT = gql`
     ${CMS_CONTENT_QUERY}
 `
+
+export const GET_HOME_DATA_QUERY = `
+query Query($sliderPosition: String!, $languageId: Int, $first: Int! ) {
+    webStorefrontHomeContent(slider_position: $sliderPosition) {
+    best_selling_products {
+        id
+        ratingAverage
+        reviews(first: $first) {
+            paginatorInfo {
+              count
+              total
+            }
+        }
+        productDetail(language_id: $languageId) {
+            name
+        }
+        productVariation {
+            id
+            qty
+            price
+            special_price
+            special_price_end
+            special_price_start
+            productVariationImage {
+                image_path
+            }
+            campaignPrice {
+                discount_price
+                campaign {
+                  start_date
+                  end_date
+                }
+            }
+        }
+        url_key
+    }
+    featured_products {
+        id
+        ratingAverage
+        reviews(first: $first) {
+            paginatorInfo {
+              count
+              total
+            }
+        }
+        productDetail(language_id: $languageId) {
+            name
+        }
+        productVariation {
+            id
+            qty
+            price
+            special_price
+            special_price_end
+            special_price_start
+            productVariationImage {
+                image_path
+            }
+            campaignPrice {
+                discount_price
+                campaign {
+                  start_date
+                  end_date
+                }
+            }
+        }
+        url_key
+    }
+    new_arrival_products {
+        id
+        ratingAverage
+        reviews(first: $first) {
+            paginatorInfo {
+              count
+              total
+            }
+        }
+        productDetail(language_id: $languageId) {
+            name
+        }
+        productVariation {
+            id
+            qty
+            price
+            special_price
+            special_price_end
+            special_price_start
+            productVariationImage {
+                image_path
+            }
+            campaignPrice {
+                discount_price
+                campaign {
+                  start_date
+                  end_date
+                }
+            }
+        }
+        url_key
+    }
+    slider {
+        Banner {
+        link
+        }
+    }
+    campaign {
+        title
+        banner
+        thumbnail
+        id
+    }
+    }
+}
+`
+
+export const GET_HOME_DATA = gql`${GET_HOME_DATA_QUERY}`
+

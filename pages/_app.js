@@ -9,7 +9,6 @@ import Footer from "../components/common/footer";
 
 import makeStore from "../store";
 
-
 import { CMS_CONTENT_QUERY, CMS_CONTENT } from '../server/queries';
 
 import "../public/sass/style.scss";
@@ -21,8 +20,8 @@ function MyApp({ Component, pageProps, store, FooterContent }) {
   useEffect(() => {
 
     console.log("apolloClient", pageProps);
-
   }, [pageProps])
+
 
   return  <ApolloProvider client={apolloClient}>
             <Provider store={store}>

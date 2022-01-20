@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import Head from "next/head"
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -102,9 +101,6 @@ function Layout( { children, closeLoginModal } ) {
                 hideProgressBar={ true }
                 newestOnTop={ true }
             />
-
-            <Script src="./js/jquery.min.js"/>
-            <Script src="./js/slide-to-submit.js" />
         </>
     )
 }

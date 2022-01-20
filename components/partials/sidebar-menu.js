@@ -15,7 +15,6 @@ function SidebarMenu({ categoryList }) {
                                     <Image className="cat-image-custom"
                                         src={ process.env.NEXT_PUBLIC_ASSET_URI + "/" + category?.icon }
                                         alt="Picture of the author"
-                                        placeholder="blur"
                                         width={24}
                                         height={25}
                                         quality={5}
