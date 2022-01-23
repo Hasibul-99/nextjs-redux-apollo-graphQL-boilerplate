@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps, store, FooterContent }) {
           </ApolloProvider>
 }
 
-export async function getInitialProps() {
+export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({

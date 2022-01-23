@@ -14,6 +14,7 @@ function CMSPage({cmsDetails}) {
             <Head>
                 <title> B71 - Campaign </title>
                 <meta property="og:description" content="Bangladesh's"/>
+                <meta property="og:image" content="Bangladesh's"/>
             </Head>
 
             <div className="page-content mb-10 pb-7 full-width-banner-custom">
@@ -60,7 +61,8 @@ export const getStaticProps = async (context) => {
     return {
         props: {
             cmsDetails: content,
-        }
+            description: `${'hello world' + context.params?.slug }`
+        },
     };
 }
 

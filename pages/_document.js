@@ -1,5 +1,4 @@
 import Document, { NextScript, Head, Main, Html, Script } from 'next/document';
-
 export default class MyDocument extends Document {
     // static async getInitialProps( ctx ) {
     //     const initialProps = await Document.getInitialProps( ctx );
@@ -7,11 +6,11 @@ export default class MyDocument extends Document {
     // }
 
     render() {
+        console.log("this.props", this.props.__NEXT_DATA__.props.pageProps.description);
+        // let 
         return (
             <Html lang="en">
                 <Head>
-                    <base href="/"></base>
-                    <title> B71 - ECommerce Store </title>
                     <base href="/"></base>
                     <link rel="icon" href="images/icons/favicon.png" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" />
@@ -29,6 +28,8 @@ export default class MyDocument extends Document {
                     <meta property="og:image:type" content="image/jpg"/>
                     <meta property="og:image:width" content="1200"/>
                     <meta property="og:image:height" content="627"/>
+
+                    <meta key="description" name="description" content={this.props.__NEXT_DATA__.props.pageProps.description} />
                 </Head>
 
                 <body>
