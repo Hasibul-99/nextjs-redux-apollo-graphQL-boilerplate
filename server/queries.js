@@ -502,4 +502,63 @@ query Query($urlKey: ID, $languageId: Int, $first: Int!) {
 }
 `
 
+export const CAMPAIGNS_LIST = gql`
+query Data($first: Int, $campaignProductsFirst2: Int!, $languageId: Int, $slug: String!) {
+    campaigns(first: $first) {
+      data {
+        banner
+        id
+        title
+        end_date
+        start_date
+        campaignProducts(first: $campaignProductsFirst2) {
+          data {
+            campaign_id
+            productVariation {
+                id
+                var_sku
+                price
+                special_price
+                special_price_end
+                special_price_start
+                productDetails {
+                  productDetail(language_id: $languageId) {
+                    name
+                  }
+                  ratingAverage
+                  url_key
+                  productVariation {
+                    id
+                    productVariationImage {
+                      image_path
+                    }
+                    qty
+                    special_price
+                    special_price_end
+                    special_price_start
+                    price
+                    campaignPrice {
+                        discount_price
+                        campaign {
+                          start_date
+                          end_date
+                        }
+                    }
+                  }
+                }
+            }
+            discount_price
+          }
+        }
+      }
+    }
+
+    slider(slug: $slug) {
+        Banner {
+          link
+        }
+    }
+}
+`
+
 export const GET_PRODUCT_INFO = gql`${GET_PRODUCT_INFO_QUERY}`
