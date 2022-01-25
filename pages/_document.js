@@ -7,7 +7,16 @@ export default class MyDocument extends Document {
 
     render() {
         console.log("this.props", this.props.__NEXT_DATA__.props.pageProps.description);
-        // let 
+
+        let pageProps = this.props?.__NEXT_DATA__?.props?.pageProps;
+
+        let metaTags = {
+            title: pageProps?.meta?.title || 'ঘরে বসে B71',
+            description: pageProps?.meta?.description || "Bangladesh's best online shopping store with 17+ million products at resounding discounts in Bangladesh.",
+            image: pageProps?.meta?.image || process.env.NEXT_PUBLIC_CLIENT_URI + "/images/home/Group-34092.png",
+            secure_url: pageProps?.meta?.secure_url || process.env.NEXT_PUBLIC_CLIENT_URI + "/images/home/Group-34092.png",
+        }
+
         return (
             <Html lang="en">
                 <Head>
@@ -19,17 +28,15 @@ export default class MyDocument extends Document {
                     <link rel="stylesheet" type="text/css" href="vendor/owl-carousel/owl.carousel.min.css" />
                     
                     <meta charSet="UTF-8"/>
+                    <meta property="og:site_name" content="https://b71.sslwireless.com/"/>
                     <meta name="theme-color" content="#FF284F"/>
-                    <meta property="og:title" content="ঘরে বসে B71"/>
-                    <meta property="og:description" content="Bangladesh's best online shopping store with 17+ million products at resounding discounts in dhaka,
-                            ctg & All across Bangladesh with cash on delivery (COD)"/>
-                    <meta property="og:image" content={process.env.NEXT_PUBLIC_CLIENT_URI + "/images/home/Group-34092.png"}/>
-                    <meta property="og:image:secure_url" content={process.env.NEXT_PUBLIC_CLIENT_URI + "/images/home/Group-34092.png"}/>
+                    <meta property="og:title" content={metaTags.title}/>
+                    <meta property="og:description" content={metaTags.description}/>
+                    <meta property="og:image" content={metaTags.image}/>
+                    <meta property="og:image:secure_url" content={metaTags.secure_url}/>
                     <meta property="og:image:type" content="image/jpg"/>
                     <meta property="og:image:width" content="1200"/>
                     <meta property="og:image:height" content="627"/>
-
-                    <meta key="description" name="description" content={this.props.__NEXT_DATA__.props.pageProps.description} />
                 </Head>
 
                 <body>

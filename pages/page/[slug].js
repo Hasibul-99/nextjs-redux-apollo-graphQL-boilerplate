@@ -61,7 +61,9 @@ export const getStaticProps = async (context) => {
     return {
         props: {
             cmsDetails: content,
-            description: `${'hello world' + context.params?.slug }`
+            meta: {
+                title: context.params?.slug
+            }
         },
     };
 }
