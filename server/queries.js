@@ -376,3 +376,130 @@ export const ALL_CMS_CONTENTS = gql`
         }
     }
 `
+
+export const GET_PRODUCT_INFO_QUERY = `
+query Query($urlKey: ID, $languageId: Int, $first: Int!) {
+    product(url_key: $urlKey) {
+      id
+      prod_sku
+      video_url
+      url_key
+      ratingAverage
+      shippingCharge(url_key: $urlKey) {
+        inside_dhaka
+        outside_dhaka_sadar
+        outside_dhaka_thana
+      }
+      categoryDetails {
+            id
+            categoryDetailInformation {
+                url_key
+                categoryDetail( language_id: $languageId ) {
+                    name
+                }
+            }
+      }
+      productVariation {
+        id
+        price
+        productVariationImage {
+          image_path
+          variation_id
+        }
+        product_id
+        qty
+        seller_sku
+        variationAttribute {
+          attributeDetails {
+            attributeLabel(language_id: $languageId) {
+              label
+            }
+            code
+            created_at
+            id
+            type
+          }
+          attribute_value
+          id
+          variation_id
+        }
+        special_price
+        special_price_end
+        special_price_start
+        var_sku
+        campaignPrice {
+            discount_price
+            campaign {
+                start_date
+                end_date
+            }
+        }
+      }
+      productDetail(language_id: $languageId) {
+        long_description
+        name
+        short_description
+      }
+      sellerDetails {
+        shop_name
+        id
+      }
+      relatedProduct(url_key: $urlKey) {
+        url_key
+        ratingAverage
+        productDetail(language_id: $languageId) {
+        name
+        }
+        productVariation {
+            id
+            price
+            special_price
+            special_price_end
+            special_price_start
+            productVariationImage {
+                image_path
+            }
+        }
+        reviews(first: $first) {
+            paginatorInfo {
+                count
+                total
+            }
+            data {
+                rating
+            }
+        }
+      }
+      attributeValues {
+        attributeDetails {
+          attributeLabel(language_id: $languageId) {
+            label
+          }
+        }
+        value
+      }
+      reviews(first: $first) {
+        paginatorInfo {
+            count
+            total
+        }
+        data {
+            customerDetails {
+                name
+            }
+            id
+            rating
+            created_at
+            customer_comment
+            reviewImages {
+                file_path
+                review_id
+                id
+            }
+        }
+      }
+    }
+}
+`
+
+export const GET_PRODUCT_INFO = gql`${GET_PRODUCT_INFO_QUERY}`

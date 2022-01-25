@@ -1,13 +1,6 @@
 import Document, { NextScript, Head, Main, Html, Script } from 'next/document';
 export default class MyDocument extends Document {
-    // static async getInitialProps( ctx ) {
-    //     const initialProps = await Document.getInitialProps( ctx );
-    //     return { ...initialProps }
-    // }
-
     render() {
-        console.log("this.props", this.props.__NEXT_DATA__.props.pageProps.description);
-
         let pageProps = this.props?.__NEXT_DATA__?.props?.pageProps;
 
         let metaTags = {
