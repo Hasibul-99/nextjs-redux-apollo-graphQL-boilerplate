@@ -612,6 +612,14 @@ export const GET_CATEGORY_PRODUCT_INFO = gql`
         }
         title
         banner
+}
+}
+`
+export const PRODUCT_IDS_SKUS = gql`
+    query ProductsIdsSkus {
+        productsIdsSkus {
+            id
+            prod_sku
         }
     }
 `

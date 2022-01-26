@@ -146,9 +146,9 @@ function DescOne( props ) {
                         <div className="row" style={{padding: "0 1rem"}}> 
                             <div className="col-md-12 pl-md-12"> 
                                 <iframe width="100%" height="400" src={product?.video_url}
-                                    title="YouTube video player" frameborder="0" 
+                                    title="YouTube video player" frameBorder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen="">
+                                    allowFullScreen="">
                                 </iframe>                                                 
                             </div>
                         </div>
@@ -187,8 +187,8 @@ function DescOne( props ) {
                                                     {
                                                         review?.reviewImages?.length ? <div className='review-images'>
                                                             {
-                                                                review.reviewImages.map(image => <img src={process.env.NEXT_PUBLIC_ASSET_URI + "/" + image.file_path} alt="avatar" 
-                                                                        width="100" height="100" className='mr-3' />
+                                                                review.reviewImages.map((image, i) => <img src={process.env.NEXT_PUBLIC_ASSET_URI + "/" + image.file_path} alt="avatar" 
+                                                                        width="100" height="100" className='mr-3' key={i + '-' + image.file_path} />
                                                                 )
                                                             }
                                                         </div> : ''

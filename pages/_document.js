@@ -4,6 +4,7 @@ export default class MyDocument extends Document {
         let pageProps = this.props?.__NEXT_DATA__?.props?.pageProps;
 
         let metaTags = {
+            site_name: pageProps?.meta?.site_name || 'https://b71.sslwireless.com/',
             title: pageProps?.meta?.title || 'ঘরে বসে B71',
             description: pageProps?.meta?.description || "Bangladesh's best online shopping store with 17+ million products at resounding discounts in Bangladesh.",
             image: pageProps?.meta?.image || process.env.NEXT_PUBLIC_CLIENT_URI + "/images/home/Group-34092.png",
@@ -21,7 +22,7 @@ export default class MyDocument extends Document {
                     <link rel="stylesheet" type="text/css" href="vendor/owl-carousel/owl.carousel.min.css" />
                     
                     <meta charSet="UTF-8"/>
-                    <meta property="og:site_name" content="https://b71.sslwireless.com/"/>
+                    <meta property="og:site_name" content={metaTags.site_name}/>
                     <meta name="theme-color" content="#FF284F"/>
                     <meta property="og:title" content={metaTags.title}/>
                     <meta property="og:description" content={metaTags.description}/>
