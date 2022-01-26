@@ -41,9 +41,9 @@ function myAccount({isUserLogin, removeUserInfo, removeUserOrder}) {
 
     useEffect(() => {
         if (!isUserLogin) {
-            router.push( {
-                pathname: '/'
-            });
+            // router.push( {
+            //     pathname: '/'
+            // });
         }
     }, [isUserLogin])
 

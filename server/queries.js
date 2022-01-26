@@ -19,6 +19,445 @@ export const LOGOUT = gql`
     }
 `
 
+
+export const GET_LOGIN_USER_INFO = gql`
+query GetUserFromToken {
+    getUserFromToken {
+        email
+        id
+        mobile
+        status
+        customer {
+            id
+            name
+            gender
+            dob
+            shippingAddressDetails {
+                id
+                customer_id
+                name
+                mobile
+                address
+                area
+                city
+                division
+            }
+            billingAddressDetails {
+                customer_id
+                name
+                mobile
+                address
+                id
+                area
+                city
+                division
+            }
+        }
+    }
+}`
+
+export const UPDATE_USER_INFO = gql`
+    mutation UpdateCustomerMutation($name: String, $gender: String, $dob: Date, $email: String) {
+        updateCustomer(name: $name, gender: $gender, dob: $dob, email: $email) {
+        user {
+            customer {
+                dob
+                gender
+                name
+                shippingAddressDetails {
+                    id
+                    customer_id
+                    name
+                    mobile
+                    address
+                    area
+                    city
+                    division
+                }
+                billingAddressDetails {
+                    customer_id
+                    name
+                    mobile
+                    address
+                    id
+                    area
+                    city
+                    division
+                }
+            }
+            email
+            mobile
+            name
+        }
+        message
+        }
+    }
+`
+
+export const CHANGE_PASSWORD = gql`
+    mutation UpdateCustomer($confirmPassword: String, $currentPassword: String, $password: String) {
+        updateCustomer(confirm_password: $confirmPassword, current_password: $currentPassword, password: $password) {
+            message
+            user {
+                id
+            }
+        }
+    }
+`
+
+export const USER_ADDRESS = gql`
+    query Address {
+        address {
+            id
+            address
+            area
+            city
+            email
+            mobile
+            name
+            thana
+            union
+        }
+    }
+`
+
+export const UPADTE_DEFAULT_ADDRESS = gql`
+mutation SetDefaultAddress($addressType: String, $addressId: Int) {
+    setDefaultAddress(address_type: $addressType, address_id: $addressId) {
+      message
+    }
+}`
+
+
+export const GET_ADDRESS_INFO = gql`
+    query Single_address($singleAddressId: Int) {
+        single_address(id: $singleAddressId) {
+            area
+            address
+            city
+            email
+            id
+            mobile
+            name
+            thana
+            union
+        }
+    }
+`
+
+
+export const UPDATE_ADDRESS_INFO = gql`
+mutation UpdateAddress($address: String, $addressId: Int, $area: String, $union: String, $thana: String, $email: String, $mobile: String, $name: String, $city: String) {
+    updateAddress(address: $address, address_id: $addressId, area: $area, union: $union, thana: $thana, email: $email, mobile: $mobile, name: $name, city: $city) {
+      address {
+        id
+        email
+        name
+      }
+      message
+    }
+}`
+
+export const GET_USER_ORDERS = gql`
+    query Query($first: Int, $page: Int, $orderId: Int) {
+        getCustomerOrder(first: $first, page: $page, order_id: $orderId) {
+            data {
+                orderItem {
+                    id
+                    product_name
+                    unit_price
+                    productVariation {
+                      productVariationImage {
+                        image_path
+                      }
+                    }
+                }
+                order_total
+                created_at
+                payment_method
+                payment_status
+                id
+            }
+            paginatorInfo {
+                total
+                perPage
+                lastPage
+                count
+            }
+        }
+    }
+`
+
+export const ORDER_DETAILS_QUERY = `
+query OrderDetails($orderDetailsId: Int) {
+    orderDetails(id: $orderDetailsId) {
+        id
+        order_status
+        payment_status
+        billing_address
+        shipping_address
+        shipping_fee
+        created_at
+        order_total
+        discount_amount
+        payment_method
+        orderItem {
+            id
+            product_name
+            productVariation {
+                productVariationImage {
+                    image_path
+                }
+                productDetails {
+                    sellerDetails {
+                       shop_name
+                    }
+                }
+                variationAttribute {
+                    attribute_value
+                    attributeDetails {
+                        code
+                    }
+                }
+            }
+            packageDetails {
+                id
+                status
+                updated_at
+                packageStatusHistory {
+                    id
+                    message
+                    status
+                    updated_at
+                }
+                hasRefundRequest {
+                    id
+                }
+                hasReturnRequest {
+                    id
+                }
+            }
+            quantity
+            unit_price
+            discount
+            attributes
+        }
+    }
+}
+`
+
+export const ORDER_DETAILS = gql`
+    ${ORDER_DETAILS_QUERY}
+`
+
+
+export const ORDER_CANCEL_REASONS = gql`
+query CancelReason {
+    cancelReason {
+        reason
+    }
+}`
+
+export const RETURN_REASONS = gql`
+query ReturnReason {
+    returnReason {
+        id
+        reason
+    }
+}`
+
+export const CREATE_RETURN_REQUEST = gql`
+mutation CreateReturnRequest($packageId: Int!, $additionalInfo: String, $returnImages: String, $returnReason: String) {
+    createReturnRequest(package_id: $packageId, additional_info: $additionalInfo, returnImages: $returnImages, return_reason: $returnReason) {
+      id
+    }
+}`
+
+export const CREATE_REFUND_REQUEST = gql`
+mutation CreateRefundRequest($packageId: Int!, $accountName: String, $accountNumber: String, $bankName: String, $branchName: String, $comment: String, $medium: String, $mfsNumber: String) {
+    createRefundRequest(package_id: $packageId, account_name: $accountName, account_number: $accountNumber, bank_name: $bankName, branch_name: $branchName, comment: $comment, medium: $medium, mfs_number: $mfsNumber) {
+      id
+    }
+}`
+
+export const SELLER_INFO_WITH_PRODUCTS = gql`
+query SellerProductSerach($sellerId: ID, $first: Int, $page: Int, $languageId: Int, $urlKey: String) {
+    sellerProductSerach(first: $first, sell_ID: $sellerId, page: $page, url_key: $urlKey) {
+      paginatorInfo {
+        total
+        perPage
+        lastPage
+      }
+      data {
+        id
+        prod_sku
+        url_key
+        ratingAverage
+        productDetail(language_id: $languageId) {
+          name
+          id
+        }
+        productVariation {
+            campaignPrice {
+                discount_price
+                campaign {
+                    start_date
+                    end_date
+                }
+            }
+          special_price
+          special_price_end
+          special_price_start
+          qty
+          product_id
+          price
+          id
+          attributes
+          productVariationImage {
+            id
+            image_path
+          }
+        }
+      }
+    }
+
+    sellerDetails(id: $sellerId) {
+        shop_name
+        sellerCategories {
+            categoryInformation {
+                parent_id
+                image
+                url_key
+                id
+                icon
+                categoryDetail(language_id: $languageId) {
+                    name
+                }
+            }
+        }
+        averageRatingCount(id: $sellerId) {
+            ratingAverage
+        }
+        banner_url
+    }
+}`
+
+
+export const GET_USER_WISHLISTS = gql`
+query Wishlist($languageId: Int) {
+    wishlist {
+        wishlistItems {
+          id
+          qty
+          updated_at
+          variation_id
+          wishlist_id
+          productVariation {
+            id
+            product_id
+            seller_sku
+            special_price
+            special_price_end
+            special_price_start
+            qty
+            price
+            campaignPrice {
+                discount_price
+                campaign {
+                  start_date
+                  end_date
+                }
+            }
+            productVariationImage {
+              image_path
+              variation_id
+            }
+            productDetails {
+              url_key
+              productDetail(language_id: $languageId) {
+                name
+              }
+            }
+          }
+        }
+    }
+}`
+
+
+export const DELETE_WISHLIST = gql`
+    mutation DeleteWishList($variationId: Int!) {
+        deleteWishList(variation_id: $variationId)
+    }
+`
+
+export const CREATE_ORDER = gql`
+    mutation CreateOrder($orderItem: String!, $billingEmail: String, $couponCode: String, $billingName: String, $billingPhone: String, $newBillingAddress: String, $newBillingArea: String, $newBillingCity: String, $newAddress: String, $newArea: String, $newCity: String, $paymentMethod: String, $shippingEmail: String, $shippingPhone: String, $shippingName: String, $shippingMethod: String, $shippingFee: Float, $shippingAddress: Int, $billingAddress: Int, $orderNotes: String, $newThana: String, $newUnion: String, $newBillingThana: String, $newBillingUnion: String, $paymentStatus: String) {
+        createOrder(order_item: $orderItem, billing_email: $billingEmail, coupon_code: $couponCode, billing_name: $billingName, billing_phone: $billingPhone, new_billing_address: $newBillingAddress, new_billing_area: $newBillingArea, new_billing_city: $newBillingCity, new_address: $newAddress, new_area: $newArea, new_city: $newCity, payment_method: $paymentMethod, shipping_email: $shippingEmail, shipping_phone: $shippingPhone, shipping_name: $shippingName, shipping_method: $shippingMethod, shipping_fee: $shippingFee, shipping_address: $shippingAddress, billing_address: $billingAddress, order_notes: $orderNotes, new_thana: $newThana, new_union: $newUnion, new_billing_thana: $newBillingThana, new_billing_union: $newBillingUnion, payment_status: $paymentStatus) {
+            id
+            customer_id
+        }
+    }
+`
+
+
+export const COUNT_REVIEWS_VALUE = gql`
+    query PaginatorInfo {
+        customerReviews {
+            paginatorInfo {
+            total
+            }
+        }
+        packageToBeReviews {
+            paginatorInfo {
+            total
+            }
+        }
+    }
+`
+
+export const PACKAGE_TO_BE_REVIEWS  = gql`
+query Data($first: Int, $page: Int, $languageId: Int) {
+    packageToBeReviews(first: $first, page: $page) {
+      data {
+        product_name
+        order_id
+        productVariation {
+            product_id
+            productVariationImage {
+                image_path
+            }
+            productDetails {
+                sellerDetails {
+                    shop_name
+                }
+                url_key
+                productDetail(language_id: $languageId) {
+                    name
+                }
+            }
+        }
+        packageDetails {
+          updated_at
+          order_item_id
+        }
+      }
+      paginatorInfo {
+        total
+        perPage
+        lastPage
+      }
+    }
+}`
+
+export const REVIEW_ORDERED_PRODUCT = gql`
+mutation CreateReviews($productId: Int!, $customerComment: String, $orderId: Int, $orderItemId: Int, $rating: Int, $reviewImages: String) {
+    createReviews(product_id: $productId, customer_comment: $customerComment, order_id: $orderId, order_item_id: $orderItemId, rating: $rating, reviewImages: $reviewImages) {
+      id
+    }
+}`
+
+
+
 export const FORGET_PASSWORD = gql`
     mutation ForgetPassword($mobile: String!, $password: String!) {
         forgetPassword(mobile: $mobile, password: $password) {
