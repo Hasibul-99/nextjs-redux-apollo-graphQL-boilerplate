@@ -503,3 +503,12 @@ query Query($urlKey: ID, $languageId: Int, $first: Int!) {
 `
 
 export const GET_PRODUCT_INFO = gql`${GET_PRODUCT_INFO_QUERY}`
+
+export const PRODUCT_IDS_SKUS = gql`
+    query ProductsIdsSkus {
+        productsIdsSkus {
+            id
+            prod_sku
+        }
+    }
+`

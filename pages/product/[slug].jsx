@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import imagesLoaded from 'imagesloaded';
-import { GET_PRODUCT_INFO, GET_PRODUCT_INFO_QUERY } from '../../server/queries';
+import { GET_PRODUCT_INFO, GET_PRODUCT_INFO_QUERY, PRODUCT_IDS_SKUS } from '../../server/queries';
+import { initializeApollo  } from "../../server/apollo";
 
 import OwlCarousel from '../../components/features/owl-carousel';
 import ProductSidebar from '../../components/product/product-sidebar';
@@ -18,13 +19,12 @@ import { productImage } from "../../utils";
 
 function ProductStickyInfo({content, metaTags}) {
   const slug = useRouter().query.slug;
-  if ( !slug ) return '';
-  
-  const [ loaded, setLoadingState ] = useState( false );
-  const product = content && content.product;
-  const related = product?.relatedProduct ? product?.relatedProduct : []; // remove in future
+  const [selectedVarient, setSelectedVarient] = useState(null);
 
-  const [selectedVarient, setSelectedVarient] = useState()
+  const [ loaded, setLoadingState ] = useState( false );
+  const product = content && content.product ? content.product : null;
+  const related = product && product?.relatedProduct ? product?.relatedProduct : []; // remove in future
+
 
   const chnageVarient = (varients) => {
       setSelectedVarient(varients);
@@ -40,6 +40,10 @@ function ProductStickyInfo({content, metaTags}) {
       }  
       if ( !product ) setLoadingState( false )
   }, [ product ] );
+
+  
+  if ( !slug ) return '';
+  if (!product) return '';
 
   return (
       <main className="main single-product custom-bg-color-one pt-5">
@@ -65,12 +69,12 @@ function ProductStickyInfo({content, metaTags}) {
               <meta name="og:type" content="product" />
               <meta name="og:description" content={product?.productDetail[0]?.short_description} />
               <meta name="og:image" content={productImage(product)} /> */}
-              
+            {/*               
               {metaTags && Object.keys(metaTags).length &&
                   Object.entries(metaTags).map((entry) => (
                       <meta title={entry[0]} content={entry[1]} />
                   ))
-              }
+              } */}
           </Head>
 
           {
@@ -146,34 +150,82 @@ function ProductStickyInfo({content, metaTags}) {
   )
 }
 
-ProductStickyInfo.getInitialProps = async ( ctx ) => {
-  let results = await fetch(`${ process.env.NEXT_PUBLIC_SERVER_URL }/graphql`, {
-      method: 'POST',
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-          query: GET_PRODUCT_INFO_QUERY,
-          variables: {
-              urlKey: ctx.query.slug, 
-              languageId: ctx?.locale === 'en' ? 1 : 2,
-              first: 5 
-          }})
-      })
-      let content = await results.json();
-      let product = content && content?.data?.product;
+export const getStaticPaths = async () => {
+  const apolloClient = initializeApollo();
+  
+  let pagePaths = [];
+  let paths = await apolloClient.query({
+    query: PRODUCT_IDS_SKUS
+  });
 
-      const metaTags = {
-          "og:title": product?.productDetail[0]?.name,
-          "og:description": product?.productDetail[0]?.short_description,
-          "og:image": productImage(product),
-          "og:url": `${(process.env.NEXT_PUBLIC_CLIENT_URI || 'https://b71-stage.sslwireless.com') + '/product/' + product?.url_key}`,
-      };
+  let productPages = paths?.data?.productsIdsSkus || [];
 
-      return {
-          content: content.data,
-          metaTags
+  productPages.forEach(product => {
+    pagePaths.push({ params : {slug: product.prod_sku} }) 
+  });
+
+  return {
+      paths: pagePaths,
+      fallback: true
+  };
+}
+
+export const getStaticProps = async (context) => {
+  const apolloClient = initializeApollo();
+
+  let content = await apolloClient.query({
+      query: GET_PRODUCT_INFO,
+      variables: {
+          languageId: context?.locale === 'en' ? 1 : 2,
+          urlKey: context.params?.slug,
+          first: 5
       }
-};
+  });
+
+  const product = content && content?.data && content?.data.product ? content?.data.product : null;
+
+  return {
+      props: {
+          content: content?.data,
+          meta: {
+            "title": product?.productDetail && product?.productDetail[0]?.name ? product?.productDetail[0]?.name : '',
+            "description": product?.productDetail && product?.productDetail[0]?.short_description ? product?.productDetail[0]?.short_description : '',
+            "image": productImage(product),
+            "secure_url": productImage(product),
+            "site_name": `${(process.env.NEXT_PUBLIC_CLIENT_URI || 'https://b71-stage.sslwireless.com') + '/product/' + product?.url_key}`,
+          }
+      },
+  };
+}
+
+// ProductStickyInfo.getInitialProps = async ( ctx ) => {
+//   let results = await fetch(`${ process.env.NEXT_PUBLIC_SERVER_URL }/graphql`, {
+//       method: 'POST',
+//       headers: {
+//           "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify({
+//           query: GET_PRODUCT_INFO_QUERY,
+//           variables: {
+//               urlKey: ctx.query.slug, 
+//               languageId: ctx?.locale === 'en' ? 1 : 2,
+//               first: 5 
+//           }})
+//       })
+//       let content = await results.json();
+//       let product = content && content?.data?.product;
+
+//       const metaTags = {
+//           "og:title": product?.productDetail[0]?.name,
+//           "og:description": product?.productDetail[0]?.short_description,
+//           "og:image": productImage(product),
+//           "og:url": `${(process.env.NEXT_PUBLIC_CLIENT_URI || 'https://b71-stage.sslwireless.com') + '/product/' + product?.url_key}`,
+//       };
+
+//       return {
+//           content: content.data,
+//           metaTags
+//       }
+// };
 
 export default ProductStickyInfo;

@@ -404,11 +404,10 @@ function DetailOne( props ) {
                 </> : ''
             }
 
-            {/*
-                <hr className="product-divider mt-1 mb-3"></hr>
-                <ProductSocialShare/>
-            */}
             
+            <hr className="product-divider mt-1 mb-3"></hr>
+            <ProductSocialShare/>
+        
             {
                 isDesc ? <DescTwo product={ product.data } adClass={ adClass } /> : ''
             }
