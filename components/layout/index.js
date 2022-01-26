@@ -14,6 +14,8 @@ import Header from '../common/header';
 import StickyFooter from '../common/sticky-footer';
 import MobileMenu from '../common/mobile-menu';
 
+import { modalActions } from '../../store/modal';
+
 import { showScrollTopHandler, scrollTopHandler, stickyHeaderHandler, 
     stickyFooterHandler, resizeHandler } from '../../utils';
 
@@ -44,7 +46,7 @@ function Layout( { children, closeLoginModal } ) {
     }, [] )
 
     useEffect( () => {
-        // closeLoginModal();
+        closeLoginModal();
 
         let bodyClasses = [ ...document.querySelector( "body" ).classList ];
         for ( let i = 0; i < bodyClasses.length; i++ ) {
@@ -88,4 +90,4 @@ function Layout( { children, closeLoginModal } ) {
     )
 }
 
-export default connect( null, {})( Layout );
+export default connect( null, {closeLoginModal: modalActions.closeLoginModal})( Layout );

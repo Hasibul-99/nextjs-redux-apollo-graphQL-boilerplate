@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import ALink from '../../../components/features/custom-link';
+import ALink from '../../features/custom-link';
 
-import SidebarFilterThree from '../../../components/partials/shop/sidebar/sidebar-filter-three';
+import SidebarFilterThree from './sidebar/sidebar-filter-three';
 
 export default function ToolBox( props ) {
     const { type = "left" } = props;
