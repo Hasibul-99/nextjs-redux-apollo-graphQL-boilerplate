@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import ToolBox from '~/components/partials/shop/toolbox';
-import ProductTwo from '~/components/features/product/product-two';
-import ProductEight from '~/components/features/product/product-eight';
-import Pagination from '~/components/features/pagination';
+import ToolBox from '../partials/shop/toolbox';
+import ProductTwo from '../../components/product/product-two';
+import ProductEight from '../../components/features/product/product-eight';
+import Pagination from '../../components/features/pagination';
 
 function CampaignList( props ) {
     const { itemsPerRow = 5, type = "left", isToolbox = true } = props;

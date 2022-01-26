@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import Head from "next/head";
 import { useRouter } from 'next/router';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 
 import ALink from '../../components/features/custom-link';
 
 import CampaignSidebarFilter from '../../components/campaign/campaign-sidebar-filter';
 import CampaignList from '../../components/campaign/campaign-list';
 
-import withApollo from '../../server/apollo';
 import { GET_CATEGORY_PRODUCT_INFO } from '../../server/queries';
 
 function Campaign() {
@@ -85,4 +84,4 @@ function Campaign() {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( Campaign );
+export default Campaign;

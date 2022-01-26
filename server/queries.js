@@ -562,3 +562,56 @@ query Data($first: Int, $campaignProductsFirst2: Int!, $languageId: Int, $slug: 
 `
 
 export const GET_PRODUCT_INFO = gql`${GET_PRODUCT_INFO_QUERY}`
+
+
+export const GET_CATEGORY_PRODUCT_INFO = gql`
+    query Query($first: Int!, $page: Int, $languageId: Int, $campaignId: ID) {
+        campaign(id: $campaignId) {
+        id
+        campaignProducts(first: $first, page: $page) {
+            paginatorInfo {
+            total
+            perPage
+            lastPage
+            }
+            data {
+                productVariation {
+                    id
+                    var_sku
+                    price
+                    special_price
+                    special_price_end
+                    special_price_start
+                    productDetails {
+                      productDetail(language_id: $languageId) {
+                        name
+                      }
+                      ratingAverage
+                      url_key
+                      productVariation {
+                        id
+                        productVariationImage {
+                          image_path
+                        }
+                        qty
+                        special_price
+                        special_price_end
+                        special_price_start
+                        price
+                        campaignPrice {
+                            discount_price
+                            campaign {
+                              start_date
+                              end_date
+                            }
+                        }
+                      }
+                    }
+                }
+            }
+        }
+        title
+        banner
+        }
+    }
+`

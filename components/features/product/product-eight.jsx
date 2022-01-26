@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 
-import ALink from '~/components/features/custom-link';
+import ALink from '../../features/custom-link';
 
-import { cartActions } from '~/store/cart';
-import { modalActions } from '~/store/modal';
-import { wishlistActions } from '~/store/wishlist';
-import { ADD_WISHLIST_MUTATION, ADD_TO_CART } from '~/server/queries';
-import { useMutation } from '@apollo/react-hooks';
-import CartPopup from '~/components/features/product/common/cart-popup';
+import { cartActions } from '../../../store/cart';
+import { modalActions } from '../../../store/modal';
+import { wishlistActions } from '../../../store/wishlist';
+import { ADD_WISHLIST_MUTATION, ADD_TO_CART } from '../../../server/queries';
+import { useMutation } from '@apollo/client';
+import CartPopup from '../../partials/cart-popup';
 import { toast } from 'react-toastify';
 
-import { toDecimal, productImage, canShowSpecialPrice } from '~/utils';
+import { toDecimal, productImage, canShowSpecialPrice } from '../../../utils';
 
 function ProductEight( props ) {
     const router = useRouter();
@@ -206,6 +206,4 @@ function mapStateToProps( state ) {
     }
 }
 
-export default connect( mapStateToProps, { toggleWishlist: wishlistActions.toggleWishlist, setWishList: wishlistActions.setWishList,
-    openLoginModal: modalActions.openLoginModal,
-    addMultipleCarts: cartActions.addMultipleCarts, ...modalActions } )( ProductEight );
+export default ProductEight;

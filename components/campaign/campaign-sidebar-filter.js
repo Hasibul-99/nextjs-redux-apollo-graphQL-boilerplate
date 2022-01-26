@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import InputRange from 'react-input-range';
 
 
-import ALink from '~/components/features/custom-link';
-import Card from '~/components/features/accordion/card';
-import OwlCarousel from '~/components/features/owl-carousel';
+import ALink from '../features/custom-link';
+import Card from '../../components/features/accordion/card';
+import OwlCarousel from '../../components/features/owl-carousel';
 
-import withApollo from '~/server/apollo';
-import { GET_SHOP_SIDEBAR_DATA } from '~/server/queries';
+import { GET_SHOP_SIDEBAR_DATA } from '../../server/queries';
 
 import SlideToggle from 'react-slide-toggle';
 
-import filterData from '~/utils/data/shop';
-import { scrollTopHandler } from '~/utils';
+import filterData from '../../utils/data/shop';
+import { scrollTopHandler } from '../../utils';
 import {demoSidebarData} from "./demoSideBar"
 
 function CampaignSidebarFilter( props ) {
@@ -360,4 +359,4 @@ function CampaignSidebarFilter( props ) {
     )
 }
 
-export default withApollo( { ssr: typeof window === 'undefined' } )( CampaignSidebarFilter );
+export default CampaignSidebarFilter;
