@@ -41,9 +41,9 @@ function myAccount({isUserLogin, removeUserInfo, removeUserOrder}) {
 
     useEffect(() => {
         if (!isUserLogin) {
-            // router.push( {
-            //     pathname: '/'
-            // });
+            router.push( {
+                pathname: '/'
+            });
         }
     }, [isUserLogin])
 
@@ -332,4 +332,5 @@ function mapStateToProps( state ) {
     }
 }
 
-export default myAccount;
+export default connect(mapStateToProps, {removeUserInfo: authUserActions.removeUserInfo,
+    removeUserOrder: authUserActions.removeUserOrder })( myAccount );

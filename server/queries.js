@@ -469,6 +469,14 @@ export const FORGET_PASSWORD = gql`
     }
 `
 
+export const APPLY_COUPON = gql`
+mutation ApplyCoupon($coupon: String!) {
+    applyCoupon(coupon: $coupon) {
+      discount_amount
+      message
+    }
+}`
+
 export const GET_CUSTOMER_CART = gql`
 query GetCustomercartItems {
     getCustomercartItems {
