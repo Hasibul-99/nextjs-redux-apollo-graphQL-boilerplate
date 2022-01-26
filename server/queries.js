@@ -623,3 +623,99 @@ export const PRODUCT_IDS_SKUS = gql`
         }
     }
 `
+
+export const CREATE_ADDRESS = gql`
+mutation CreateAddress($area: String!, $city: String!, $thana: String!, $union: String!, $address: String, $email: String, $mobile: String, $name: String, $billing: Int, $shipping: Int) {
+    createAddress(area: $area, city: $city, thana: $thana, union: $union, address: $address, email: $email, mobile: $mobile, name: $name, billing: $billing, shipping: $shipping) {
+      message
+      address {
+        id
+      }
+    }
+}`
+
+export const ADDRESS_MAP = gql`
+    query AddressMap {
+        addressMap {
+            id
+            name
+            cityList {
+                id
+                name
+                areaList {
+                    name
+                    id
+                }
+            }
+        }
+    }
+`
+
+export const ADDRESS_ECOURIER = gql`
+    query Post_codes {
+        getAddressEcourier {
+            city
+            thana {
+                thana_name
+                post_codes {
+                    area {
+                        name
+                    }
+                    post_code_name
+                }
+            }
+        }
+    }
+`
+
+export const CUSTOMER_REVIEWS = gql`
+query CustomerReviews($first: Int, $page: Int, $languageId: Int, $attributeLabelLanguageId2: Int) {
+    customerReviews(first: $first, page: $page) {
+      data {
+        customer_comment
+        id
+        rating
+        reviewImages {
+          file_path
+          id
+        }
+        status
+        order {
+            created_at
+        }
+        productDetails {
+            url_key
+            productDetail(language_id: $languageId) {
+                name
+            }
+            sellerDetails {
+                shop_name
+            }
+            productVariation {
+                productVariationImage {
+                    image_path
+                    variation_id
+                }
+            }
+            attributeValues {
+                attributeDetails {
+                attributeLabel(language_id: $attributeLabelLanguageId2) {
+                    label
+                    id
+                }
+                attributeOptionValues {
+                    id
+                    option_value
+                    attribute_id
+                }
+                }
+            }
+        }
+      }
+      paginatorInfo {
+        total
+        perPage
+        lastPage
+      }
+    }
+}`
