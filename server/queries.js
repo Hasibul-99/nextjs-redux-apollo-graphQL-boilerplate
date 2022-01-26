@@ -1,5 +1,236 @@
 import { gql } from "@apollo/client";
 
+export const SENT_OTP = gql`
+    mutation SendOTPMutation($mobile: String!) {
+        sendOTP(mobile: $mobile)
+    }
+`
+export const CHECK_OTP = gql`
+    mutation CheckOtpMutation($mobile: String!, $otp: String!) {
+        checkOtp(mobile: $mobile, otp: $otp)
+    }
+`
+
+export const LOGOUT = gql`
+    mutation Logout {
+        logout {
+            message
+        }
+    }
+`
+
+export const FORGET_PASSWORD = gql`
+    mutation ForgetPassword($mobile: String!, $password: String!) {
+        forgetPassword(mobile: $mobile, password: $password) {
+            message
+            user {
+                id
+            }
+        }
+    }
+`
+
+export const GET_CUSTOMER_CART = gql`
+query GetCustomercartItems {
+    getCustomercartItems {
+        shippingCharge
+        cartItems {
+            qty
+            variation_id
+            productVariation {
+                variationAttribute {
+                    attribute_value
+                    attributeDetails {
+                        code
+                    }
+                }
+                productVariationImage {
+                    image_path
+                    id
+                }
+                product_id
+                id
+                var_sku
+                price
+                special_price
+                special_price_end
+                special_price_start
+                qty
+                campaignPrice {
+                    discount_price
+                    campaign {
+                      start_date
+                      end_date
+                    }
+                }
+                productDetails {
+                productDetail {
+                    name
+                }
+                ratingAverage
+                url_key
+                productVariation {
+                    id
+                    productVariationImage {
+                        image_path
+                    }
+                    qty
+                    special_price
+                    special_price_end
+                    special_price_start
+                    price
+                    campaignPrice {
+                        discount_price
+                        campaign {
+                          start_date
+                          end_date
+                        }
+                    }
+                }
+            }
+          }
+        }
+    }
+}
+`
+
+export const SEND_OTP_FORGET_PASS = gql`
+    mutation SendOTPForgetPass($mobile: String!) {
+        sendOTPForgetPass(mobile: $mobile)
+}`
+
+export const USER_ALL_INFO = gql`
+    query Query( $first: Int, $languageId: Int, $NotiFirst: Int, $NotiPage: Int ) {
+    getUserFromToken {
+        email
+        id
+        mobile
+        status
+        customer {
+            id
+            name
+            gender
+            dob
+            shippingAddressDetails {
+                id
+                email
+                customer_id
+                name
+                mobile
+                address
+                area
+                city
+                division
+                thana
+                union
+            }
+            billingAddressDetails {
+                customer_id
+                email
+                thana
+                union
+                name
+                mobile
+                address
+                id
+                area
+                city
+                division
+            }
+        }
+    }
+    getCustomerOrder(first: $first) {
+        data {
+            id
+            created_at
+            orderItem {
+            productVariation {
+                id
+                productVariationImage {
+                    image_path
+                }
+            }
+            product_name
+            unit_price
+            }
+            payment_method
+            payment_status
+        }
+    }
+    customerNotifications {
+        notification(first: $NotiFirst, page: $NotiPage) {
+            data {
+              message
+              redirect_url
+              updated_at
+              read_at
+              id
+            }
+        }
+    }
+    
+    wishlist {
+        wishlistItems {
+          id
+          qty
+          updated_at
+          variation_id
+          wishlist_id
+          productVariation {
+            id
+            product_id
+            seller_sku
+            special_price
+            special_price_end
+            special_price_start
+            qty
+            price
+            campaignPrice {
+              discount_price
+            }
+            productVariationImage {
+              image_path
+              variation_id
+            }
+            productDetails {
+              url_key
+              productDetail(language_id: $languageId) {
+                name
+              }
+            }
+          }
+        }
+    }
+}`
+
+
+export const REGISTER_CUSTOMER = gql`
+    mutation RegisterCustomerMutation($password: String!, $name: String, $mobile: String, $email: String) {
+        registerCustomer(password: $password, name: $name, mobile: $mobile, email: $email) {
+            userData {
+                email
+                id
+                mobile
+                name
+            }
+            access_token
+        }
+    }
+`
+
+
+export const LOGIN_CUSTOMER = gql`
+    mutation LoginMutation($password: String!, $mobile: String) {
+        login(password: $password, mobile: $mobile) {
+            access_token
+            userData {
+                name
+            }
+        }
+    }
+`
+
+
 export const GET_CATEGORY_LIST = gql`
     query Query($categoryDetailLanguageId: Int, $first: Int) {
         categories(first: $first) {

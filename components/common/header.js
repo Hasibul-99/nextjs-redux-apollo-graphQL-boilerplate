@@ -18,6 +18,7 @@ import CartMenu from '../partials/cart-menu';
 import NotificationMenu from "../partials/notification-menu";
 import SidebarMenu from "../partials/sidebar-menu";
 import MainMenu from "../partials/main-menu";
+import LoginModal from "../features/modals/login-modal";
 
 function Header(props) {
     const { addToCategory, isUserLogin, userOrders } = props;
@@ -167,7 +168,7 @@ function Header(props) {
                                 </div> : ''
                         }
                         
-                        {/* <LoginModal /> */}
+                        <LoginModal />
                     </div>
                 </div>
             </div>

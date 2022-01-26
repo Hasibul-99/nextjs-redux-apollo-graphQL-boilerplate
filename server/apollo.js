@@ -1,9 +1,11 @@
 import { useMemo } from "react";
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { relayStylePagination } from '@apollo/client/utilities';
+import Cookies from 'js-cookie'
 
 
 const API_URI = `${ process.env.NEXT_PUBLIC_SERVER_URL }/graphql`;
+const token = Cookies.get('b71_access_token');
 
 let apolloClient;
 
@@ -26,6 +28,9 @@ function createApolloClient() {
     ssrMode: typeof window === "undefined", // set to true for SSR
     link: new HttpLink({
       uri: API_URI,
+      headers: {
+        authorization: token ? `Bearer ${token}` : "hello",
+      }
     }),
     cache: new InMemoryCache(),
   });
