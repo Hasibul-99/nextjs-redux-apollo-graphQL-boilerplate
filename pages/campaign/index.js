@@ -25,7 +25,7 @@ import { useQuery } from '@apollo/client';
 
 import { CAMPAIGNS_LIST } from '../../server/queries';
 
-import NewCollection from '../../components/partials/home/new-collection';
+import NewCollection from '../../components/home/new-collection';
 
 function Campaign() {
     const router = useRouter();
