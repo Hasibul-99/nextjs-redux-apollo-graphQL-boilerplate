@@ -1425,3 +1425,28 @@ export const ORDER_CANCEL_FROM_PAYMENT_PAGE = gql`
         }
     }
 `
+
+export const PRODUCT_SEARCH_UNI = gql`
+mutation ProductSearchUni($searchQuery: String) {
+    ProductSearchUni(search_query: $searchQuery) {
+        max_price
+        min_price
+        layered_data {
+            label
+            values {
+            id
+            value
+            }
+        }
+        product
+        result_count
+    }
+}`
+
+export const GET_CATEGORY_SHORT_INFO = gql`
+    query CategoryDetails($urlKey: ID) {
+        categoryDetails(url_key: $urlKey) {
+            image
+        }
+    }
+`
