@@ -1397,3 +1397,31 @@ query CustomerReviews($first: Int, $page: Int, $languageId: Int, $attributeLabel
       }
     }
 }`
+
+export const PAYMENT_INTRIGATION = gql`
+mutation PaymentInitiate($orderId: ID, $paymentMethod: String) {
+    paymentInitiate(order_id: $orderId, payment_method: $paymentMethod) {
+        GatewayPageURL
+        order {
+            id
+        }
+        sessionkey
+        status
+        desc    
+        failedreason
+        gw
+        storeBanner
+        storeLogo
+    }
+}`
+
+export const ORDER_CANCEL_FROM_PAYMENT_PAGE = gql`
+    mutation OrderCancelFromPaymentPage($orderId: ID) {
+        orderCancelFromPaymentPage(order_id: $orderId) {
+            message
+            user {
+                id
+            }
+        }
+    }
+`
