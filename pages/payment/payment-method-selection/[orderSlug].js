@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { PAYMENT_INTRIGATION, ORDER_DETAILS_QUERY, ORDER_CANCEL_FROM_PAYMENT_PAGE } from '../../../server/queries';
-import { useMutation } from '@apollo/client';
+import { PAYMENT_INTRIGATION, ORDER_DETAILS_QUERY, ORDER_DETAILS, ORDER_CANCEL_FROM_PAYMENT_PAGE } from '../../../server/queries';
+import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
 import Modal from 'react-modal';
 import moment from "moment";
+import { initializeApollo  } from "../../../server/apollo";
+
 
 const customStyles = {
     content: {
@@ -21,12 +23,18 @@ const customStyles = {
     },
 };
 
-const PaymentMethodSelection = ({isUserLogin, orderDetails}) => {
+const PaymentMethodSelection = ({isUserLogin}) => {
     const router = useRouter();
     const query = router.query;
     const [paymentType, setPaymentType] = useState('SSL');
     const [isLoading, setIsLoading] = useState(true);
     const [modalIsOpen, setIsOpen] = useState(false);
+
+    const { loading, error, data } = useQuery(ORDER_DETAILS, {
+        variables: { orderDetailsId: parseInt(query.orderSlug) },
+      });
+
+    let orderDetails = data && data.orderDetails;
 
     const [paymentIntrigation] = useMutation(PAYMENT_INTRIGATION, {
         onError: ({ graphQLErrors, networkError, operation, forward }) => {
@@ -79,6 +87,9 @@ const PaymentMethodSelection = ({isUserLogin, orderDetails}) => {
         });
 
         if (res && res?.data?.paymentInitiate) {
+
+            console.log("res?.data?.paymentInitiate?.GatewayPageURL",res?.data?.paymentInitiate?.GatewayPageURL);
+
             if ( res?.data?.paymentInitiate?.GatewayPageURL ) {
                 window.location.replace(res?.data?.paymentInitiate?.GatewayPageURL)
             }
@@ -133,9 +144,9 @@ const PaymentMethodSelection = ({isUserLogin, orderDetails}) => {
                 router.push('/my-account/?content=order-history');
             }
         } else {
-            router.push({ pathname: '/'});
+            // router.push({ pathname: '/'});
         }
-    }, []);
+    }, [isUserLogin && orderDetails]);
 
     return (
         <div className="payment-method row pt-10 pb-5 mb-10">
@@ -260,28 +271,28 @@ function mapStateToProps( state ) {
     }
 }
 
-PaymentMethodSelection.getInitialProps = async ( ctx ) => {
-    const token = Cookies.get('b71_access_token');
+// export async function getServerSideProps(ctx) {
+//     const apolloClient = initializeApollo();
 
-    let results = await fetch(`${ process.env.NEXT_PUBLIC_SERVER_URL }/graphql`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            authorization: token ? `Bearer ${token}` : "",
-        },
-        body: JSON.stringify({
-            query: ORDER_DETAILS_QUERY,
-            variables: {
-                orderDetailsId: parseInt(ctx.query.orderSlug)
-            }})
-        })
-        let orderDetails = await results.json();
+//     console.log("ctx.query.orderSlug", ctx.query.orderSlug);
+  
+//     let orderDetails = await apolloClient.query({
+//       query: ORDER_DETAILS,
+//       variables: {
+//         orderDetailsId: parseInt(ctx.query.orderSlug)
+//       }
+//     });
 
-        return {
-            orderDetails: orderDetails?.data?.orderDetails
-        }
-};
+//     console.log("orderDetails", orderDetails)
+  
+//     return {
+//       props: {
+//         orderDetails: orderDetails?.data?.orderDetails,
+//       },
+//       revalidate: 1,
+//     };
+// }
 
-export default PaymentMethodSelection;
+export default connect(mapStateToProps, {})(PaymentMethodSelection);
 
 
