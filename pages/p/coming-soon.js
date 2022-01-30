@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Helmet from 'react-helmet';
+import Head from 'next/head';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import ALink from '../../components/features/custom-link';
@@ -18,9 +18,9 @@ function ComingSoon () {
     } )
     return (
         <main className="main">
-            <Helmet>
+            <Head>
                 <title>Riode React eCommerce Template | Coming Soon</title>
-            </Helmet>
+            </Head>
 
             <h1 className="d-none">Riode React eCommerce Template - Coming Soon</h1>
 

@@ -156,4 +156,4 @@ function SidebarFilterThree() {
     )
 }
 
-export default ( SidebarFilterThree );
+export default SidebarFilterThree;

@@ -6,7 +6,7 @@ import { useLazyQuery } from '@apollo/client';
 import { dateFormate } from "../../utils/helpers";
 import ALink from '../../components/features/custom-link';
 
-const success = () => {
+const Success = () => {
     const router = useRouter();
     const query = router.query;
     const [orderInfo, setOrderInfo] = useState();
@@ -79,4 +79,4 @@ const success = () => {
     )
 }
 
-export default success;
+export default Success;

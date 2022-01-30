@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from 'next/router';
 import ALink from '../../components/features/custom-link';
 
-export default function success() {
+export default function Failed() {
     const router = useRouter();
     const query = router.query;
     

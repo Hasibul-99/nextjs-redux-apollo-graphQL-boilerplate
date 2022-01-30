@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import Head from 'next/head';
 import Reveal from 'react-awesome-reveal';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import GoogleMapReact from 'google-map-react';
@@ -20,9 +20,9 @@ function ContactUs () {
 
     return (
         <main className="main contact-us">
-            <Helmet>
+            <Head>
                 <title>Riode React eCommerce Template | Contact Us</title>
-            </Helmet>
+            </Head>
 
             <h1 className="d-none">Riode React eCommerce Template - Contact Us</h1>
 
