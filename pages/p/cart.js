@@ -130,8 +130,8 @@ function Cart ( props ) {
                                                                                 <ALink href={ '/product/' + item?.productVariation?.productDetails?.url_key }>
                                                                                     {item.productVariation?.productDetails?.productDetail[0].name}
                                                                                 </ALink>
-                                                                                <p class="mb-0"> 
-                                                                                    <span class="amount">
+                                                                                <p className="mb-0"> 
+                                                                                    <span className="amount">
                                                                                         {/* Color: White , Size: Large */}
                                                                                         {item.productVariation?.variationAttribute?.length ? <>
                                                                                             {

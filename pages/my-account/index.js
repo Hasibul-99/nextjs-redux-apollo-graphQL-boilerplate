@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useRouter } from 'next/router';
-// import Cookies from 'js-cookie';
+
+import { connect } from 'react-redux';
+import { useEffect, useState } from "react";
 import Router from 'next/router';
 
 import ALink from '../../components/features/custom-link';
@@ -21,13 +23,10 @@ import RequestCancellation from "../../components/myAccount/request-cancellation
 import Ticket from "../../components/myAccount/ticket";
 import AddressBookedit from "../../components/myAccount/address-book-edit";
 
-import { connect } from 'react-redux';
-import { useEffect } from "react";
-import { useState } from "react";
 
 import { authUserActions } from '../../store/authUser';
 
-function myAccount({isUserLogin, removeUserInfo, removeUserOrder}) {
+const MyAccount = ({isUserLogin, removeUserInfo, removeUserOrder}) => {
     const router = useRouter();
     const query = router.query;
     const [showMobileMenu, setShowMObileMenu] = useState(true);
@@ -37,6 +36,39 @@ function myAccount({isUserLogin, removeUserInfo, removeUserOrder}) {
         removeUserInfo();
         removeUserOrder(null);
         Router.reload("/");
+    }
+
+    const showPageContent = () => {
+        switch (query.content) {
+            case 'edit-profile':
+                return <EditProfile/>;
+            case 'change-passowrd':
+                return <ChangePassword/>;
+            case 'address-book':
+                return <AddressBook/>;
+            case 'address-book-add':
+                return <AddressBookAdd/>;
+            case 'address-book-edit':
+                return <AddressBookedit/>;
+            case 'order-history':
+                return <OrderHistory/>
+            case 'cancelled-orders':
+                return <CancelledOrders/>
+            case 'track-order':
+                return <TrackOrder/>
+            case 'wishlist':
+                return <Wishlist/>
+            case 'reviews':
+                return <Reviews/>
+            case 'review-add':
+                return <ReviewAdd/>
+            case 'request-cancellation':
+                return <RequestCancellation/>
+            case 'ticket':
+                return <Ticket/>    
+            default:
+                return <Dashboard/>;
+        }
     }
 
     useEffect(() => {
@@ -134,7 +166,7 @@ function myAccount({isUserLogin, removeUserInfo, removeUserOrder}) {
                         
                         <div className={`card ${showMobileMenu ? 'd-none' : ''}`}>
                             <div className="card-body">
-                                {(() => {
+                                {/* {(() => {
                                     switch (query.content) {
                                         case 'edit-profile':
                                             return <EditProfile/>;
@@ -165,7 +197,8 @@ function myAccount({isUserLogin, removeUserInfo, removeUserOrder}) {
                                         default:
                                             return <Dashboard/>;
                                     }
-                                })()}
+                                })()} */}
+                                {showPageContent()}
                             </div>
                         </div>
                     </div>
@@ -333,4 +366,4 @@ function mapStateToProps( state ) {
 }
 
 export default connect(mapStateToProps, {removeUserInfo: authUserActions.removeUserInfo,
-    removeUserOrder: authUserActions.removeUserOrder })( myAccount );
+    removeUserOrder: authUserActions.removeUserOrder })( MyAccount );

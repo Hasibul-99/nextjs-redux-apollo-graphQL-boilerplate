@@ -21,7 +21,7 @@ function RequestCancellation() {
                             <p className="mb-0" style={{fontWeight:'500'}}>  Choose the item (s) you want to cancel   </p>
                             <div className="form-checkbox mt-4 mb-4">
                                 <input type="checkbox" className="custom-checkbox" id="terms-condition2" name="terms-condition" />
-                                <label className="form-control-label" for="terms-condition2">
+                                <label className="form-control-label" htmlFor="terms-condition2">
                                     <div className="row pl-3">
                                         <div className="col-5 product-thumbnail rounded d-flex align-items-center"> 
                                             <img src="../images/products/product5.jpg" />
@@ -47,7 +47,7 @@ function RequestCancellation() {
                         <div className="col-xs-12 border-bottom">
                             <div className="form-checkbox mt-4 mb-4">
                                 <input type="checkbox" className="custom-checkbox" id="terms-condition2" name="terms-condition" />
-                                <label className="form-control-label" for="terms-condition2">
+                                <label className="form-control-label" htmlFor="terms-condition2">
                                     <div className="row pl-3">
                                         <div className="col-5 product-thumbnail rounded d-flex align-items-center"> 
                                             <img src="images/products/product4.jpg" />
@@ -127,7 +127,7 @@ function RequestCancellation() {
                     <div className="col-xs-12 mt-2"> 
                         <div className="form-checkbox mt-2 mb-2">
                             <input type="checkbox" className="custom-checkbox" id="terms-condition3" name="terms-condition3" />
-                            <label className="form-control-label pl-5" for="terms-condition3">
+                            <label className="form-control-label pl-5" htmlFor="terms-condition3">
                                 I have read and agree to the website <a href="#">terms and conditions </a>*
                             </label>
                         </div>

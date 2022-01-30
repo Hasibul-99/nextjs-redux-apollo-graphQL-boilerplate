@@ -5,7 +5,6 @@ import { useLazyQuery } from '@apollo/client';
 
 import ALink from '../../components/features/custom-link';
 
-import CampaignSidebarFilter from '../../components/campaign/campaign-sidebar-filter';
 import CampaignList from '../../components/campaign/campaign-list';
 
 import { GET_CATEGORY_PRODUCT_INFO } from '../../server/queries';

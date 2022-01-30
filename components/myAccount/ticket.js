@@ -31,7 +31,7 @@ function Ticket() {
                     <textarea rows="3" className="form-control" required="" placeholder="Write your Issue*"></textarea>
                 </div>
                 <div className="col-sm-12">
-                    <label for="files">Upload Image: </label>
+                    <label htmlFor="files">Upload Image: </label>
                     <div className="upload__box mb-4">
                         <div className="upload__btn-box">
                             <label className="upload__btn d-block">

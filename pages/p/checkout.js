@@ -705,8 +705,8 @@ function Checkout( props ) {
                                                                     <ALink href={ '/product/' + item?.productVariation?.productDetails?.url_key }>
                                                                         {item.productVariation?.productDetails?.productDetail[0].name}
                                                                     </ALink>
-                                                                    <p class="mb-0"> 
-                                                                        <span class="amount">
+                                                                    <p className="mb-0"> 
+                                                                        <span className="amount">
                                                                             {item.productVariation?.variationAttribute?.length ? <>
                                                                                 {
                                                                                     item.productVariation?.variationAttribute.map((att, i) => <Fragment key={'tree-' + i }>

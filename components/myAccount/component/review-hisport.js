@@ -86,7 +86,7 @@ export default function ReviewHisport() {
                                             review?.reviewImages?.length ? <div className="row">
                                                 <div className="col-12 alignment-custom">
                                                     {
-                                                        review?.reviewImages.map(img => <div className="product-thumb-img-custom mb-2">
+                                                        review?.reviewImages.map((img, i) => <div key={i + img.file_path} className="product-thumb-img-custom mb-2">
                                                             <img src={process.env.NEXT_PUBLIC_ASSET_URI + "/" + img.file_path} />
                                                         </div>)
                                                     }

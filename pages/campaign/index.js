@@ -128,7 +128,7 @@ function Campaign() {
                             campaigns?.length ? <section className="campaign-section">
                             <div className="container-fluid p-0">
                                 {
-                                    campaigns.map(campaign => <Fragment>
+                                    campaigns.map(campaign => <Fragment key={campaign.id}>
                                         {
                                             isUnderCampaign(campaign) ? <>
                                                 <div className="col-md-12 text-center mb-3">
@@ -142,7 +142,6 @@ function Campaign() {
                                                 }
                                             </> : ''
                                         }
-                                        
                                     </Fragment>)
                                 }
                             </div>  {/* end container fluid    */} 

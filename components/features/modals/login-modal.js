@@ -556,7 +556,7 @@ function LoginModal(props) {
                                                         </div>
 
                                                         <div className="form-group">
-                                                            <input type="password" className="form-control" id="register-password" autocomplete="new-password"
+                                                            <input type="password" className="form-control" id="register-password" autoComplete="new-password"
                                                             name="password" placeholder="Password *" required />
                                                             {
                                                                 registerError?.password ? <small className={`valid-feedback error-valid`}>

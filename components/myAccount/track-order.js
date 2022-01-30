@@ -248,8 +248,8 @@ export default function TrackOrder() {
                                                 <tr>
                                                     <td>
                                                         {order.product_name}
-                                                        <p class="mb-0"> 
-                                                            <span class="amount">
+                                                        <p className="mb-0"> 
+                                                            <span className="amount">
                                                                 {/* Color: White , Size: Large */}
                                                                 {order.productVariation?.variationAttribute?.length ? <>
                                                                     {
