@@ -1397,3 +1397,56 @@ query CustomerReviews($first: Int, $page: Int, $languageId: Int, $attributeLabel
       }
     }
 }`
+
+export const PAYMENT_INTRIGATION = gql`
+mutation PaymentInitiate($orderId: ID, $paymentMethod: String) {
+    paymentInitiate(order_id: $orderId, payment_method: $paymentMethod) {
+        GatewayPageURL
+        order {
+            id
+        }
+        sessionkey
+        status
+        desc    
+        failedreason
+        gw
+        storeBanner
+        storeLogo
+    }
+}`
+
+export const ORDER_CANCEL_FROM_PAYMENT_PAGE = gql`
+    mutation OrderCancelFromPaymentPage($orderId: ID) {
+        orderCancelFromPaymentPage(order_id: $orderId) {
+            message
+            user {
+                id
+            }
+        }
+    }
+`
+
+export const PRODUCT_SEARCH_UNI = gql`
+mutation ProductSearchUni($searchQuery: String) {
+    ProductSearchUni(search_query: $searchQuery) {
+        max_price
+        min_price
+        layered_data {
+            label
+            values {
+            id
+            value
+            }
+        }
+        product
+        result_count
+    }
+}`
+
+export const GET_CATEGORY_SHORT_INFO = gql`
+    query CategoryDetails($urlKey: ID) {
+        categoryDetails(url_key: $urlKey) {
+            image
+        }
+    }
+`
